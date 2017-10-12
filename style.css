@@ -1,0 +1,48 @@
+body{
+  background-image: url(assets/images/hallwayBackground.jpg);
+  background-size: cover;
+  position: relative;
+    font-family: de-walpergens-pica, serif;
+}
+
+button{
+  background-color: black;
+  border-color: black;
+  color:red;
+  border-radius: 3px;
+  font-family: de-walpergens-pica, serif;
+  font-size: 28px;
+}
+div{
+  color: white;
+}
+.row{
+  margin:1% 0;
+}
+
+h1, h2, h3, p{
+  font-family: de-walpergens-pica, serif;
+  color: white;
+  text-align: center;
+z-index: 10;
+}
+.centered{
+  text-align: center;
+}
+#timer{
+  margin: 0 auto;
+  display:block;
+}
+
+#text1{
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+}
+
+#transparent{
+  opacity: 0.5;
+}
+.row{
+  text-align:center;
+}
