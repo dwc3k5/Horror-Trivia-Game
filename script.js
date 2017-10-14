@@ -4,7 +4,7 @@
 // $(".btn1").click(function(){
 //         $("p").fadeOut()
 /*MainClock--------------------------------------------------------------------*/
-var minDown = 5;
+var minDown = 3;
 var secDown = 0;
 var secQ = 15;
 var begun =false;
@@ -12,6 +12,8 @@ var currentQ =1;
 var question = "question" + currentQ;
 var chances = 5;
 var livesLeft=0;
+var correct=0;
+var incorrect=0;
 // var q = {
 // q1:{},
 // q2:{}
@@ -28,7 +30,7 @@ var Questions ={
     // aCorrect : "<button id='a2' class='a2 choices'>Christine</button>"},
 
    question2 :{
-    q1:"<h2>What is the name of the android who attacks Ripley in the first Alien movie</h2>",
+    q1:"<h2>What is the name of the android who attacks Ripley in the first Alien movie?</h2>",
     a1:"<button class='choices'>Rook</button>",
     a2:"<button class='choices'>Bishop</button>",
     a3:"<button class='choices'>T0317</button>",
@@ -60,7 +62,7 @@ var Questions ={
     aCorrect:"5"},
 
   question6:{
-    q1:"<h2>What was the name of the person possessed in 'The Exorcist'</h2>",
+    q1:"<h2>What was the name of the person possessed in 'The Exorcist'?</h2>",
     a1:"<button class='choices'>Reagan</button>",
     a2:"<button class='choices'>Michael</button>",
     a3:"<button class='choices'>Amanda</button>",
@@ -76,7 +78,7 @@ var Questions ={
     aCorrect:"His scalp"},
 
   question8:{
-    q1:"<h2>Which author created the C'Thulu mythos?</h2>",
+    q1:"<h2>Which author created the C'Thulhu mythos?</h2>",
     a1:"<button class='choices'>R.L. Stine</button>",
     a2:"<button class='choices'>H.P. Lovecraft</button>",
     a3:"<button class='choices'>Edgar Allen Poe</button>",
@@ -108,12 +110,12 @@ var Questions ={
     aCorrect:"Afraid"},
 
   question12:{
-    q1:"<h2>Vicitims of Pennywise are most delicious when they are?</h2>",
-    a1:"<button class='choices'>Young</button>",
-    a2:"<button class='choices'>Alone</button>",
-    a3:"<button class='choices'>Afraid</button>",
-    a4:"<button class='choices'>Asleep</button>",
-    aCorrect:"Afraid"},
+    q1:"<h2>Who's heartbeat is heard in 'A Telltale Heart'?</h2>",
+    a1:"<button class='choices'>a lover's</button>",
+    a2:"<button class='choices'>an old man's</button>",
+    a3:"<button class='choices'>a mother's</button>",
+    a4:"<button class='choices'>a child's</button>",
+    aCorrect:"an old man's"},
 
   question13:{
     q1:"<h2>A person has __ days to live after watching the vhs in 'The Ring'?</h2>",
@@ -127,9 +129,57 @@ var Questions ={
     q1:"<h2>Which R.L. Stine book features Slappy?</h2>",
     a1:"<button class='choices'>Night of the Living Dummy</button>",
     a2:"<button class='choices'>Welcome to Dead House</button>",
-    a3:"<button class='choices'>Afraid</button>",
-    a4:"<button class='choices'>Asleep</button>",
-    aCorrect:"Afraid"},
+    a3:"<button class='choices'>The Haunted Mask</button>",
+    a4:"<button class='choices'>Stay out of the basement!</button>",
+    aCorrect:"Night of the Living Dummy"},
+
+  question15:{
+    q1:"<h2>In 'Cabin in the Woods' Chris Hemsworth's character, 'Curt', dies when he...</h2>",
+    a1:"<button class='choices'>Accidently falls off a cliff</button>",
+    a2:"<button class='choices'>Is attacked by a merman</button>",
+    a3:"<button class='choices'>Gets attacked by hillbilly zombies</button>",
+    a4:"<button class='choices'>Drives a motorcycle into an invisible wall</button>",
+    aCorrect:"Drives a motorcycle into an invisible wall"},
+
+  question16:{
+    q1:"<h2>During the music video 'Thriller' Michael Jackson is revealed to be a...</h2>",
+    a1:"<button class='choices'>vampire</button>",
+    a2:"<button class='choices'>werewolf</button>",
+    a3:"<button class='choices'>illusion</button>",
+    a4:"<button class='choices'>ghost</button>",
+    aCorrect:"werewolf"},
+
+  question17:{
+    q1:"<h2>Who haunted children's nightmares??</h2>",
+    a1:"<button class='choices'>Michael Myers</button>",
+    a2:"<button class='choices'>Jason Voorhees</button>",
+    a3:"<button class='choices'>Freddy Krueger</button>",
+    a4:"<button class='choices'>Pennywise</button>",
+    aCorrect:"Freddy Krueger"},
+
+    question18:{
+      q1:"<h2>Where did Alfred Hitchcock make his cameo appearance in 'The Birds'?</h2>",
+      a1:"<button class='choices'>Drinking a beer in a pub</button>",
+      a2:"<button class='choices'>Running from birds at a gas station</button>",
+      a3:"<button class='choices'>Dead in a cemetary</button>",
+      a4:"<button class='choices'>Walking dogs out of a pet store</button>",
+      aCorrect:"Walking dogs out of a pet store"},
+
+    question19:{
+      q1:"<h2>Hannibal Lecter first appeared in what film?</h2>",
+      a1:"<button class='choices'>The Silence of The Lambs</button>",
+      a2:"<button class='choices'>Hannibal</button>",
+      a3:"<button class='choices'>Red Dragon</button>",
+      a4:"<button class='choices'>Along came a Spider</button>",
+      aCorrect:"The Silence of The Lambs"},
+
+    question20:{
+      q1:"<h2>In the original ghostbusters, 'The Destructor' manifests in the form of?</h2>",
+      a1:"<button class='choices'>A giant black hound</button>",
+      a2:"<button class='choices'>Evil versions of the ghostbusters</button>",
+      a3:"<button class='choices'>An army of ghosts</button>",
+      a4:"<button class='choices'>The Stay Puft Marshmallow Man</button>",
+      aCorrect:"The Stay Puft Marshmallow Man"},
 
 
 };
@@ -144,9 +194,20 @@ var Questions ={
 
 
 /*question1placed--------------------------------------------------------------*/
+function lose(){
+  $("body, html").attr({"background-color":"black",
+                        "background-image":""});
+  $("body").html("<div class='row'><button id='begin'>Play again?</button></div>");
+  $("body").html("<div class='row'><button id='begin'>You are Dead!</button></div><div class='row'><button>Correct Answers: "+correct+"</button><button>Incorrect Answers: "+incorrect+"</button>");
+}
+
+function survive(){
+$("body").html("<div class='row'><button id='begin'>You Survived!</button></div><div class='row'><button>Correct Answers: "+correct+"</button><button>Incorrect Answers: "+incorrect+"</button>");
+}
 function backgroundSwap(){
-  $("body,html").css("background-image","url(assets/images/bloodAlleyBackground.jpg)");
+
   $("body,html").css("background-image","url(assets/images/creepyWoods.jpg)");
+  $("body,html").css("background-size", "cover");
 }
 
 function nextQuestion(){
@@ -162,17 +223,21 @@ function scoreTrack(){
   if(livesLeft===1){
     $("#scoreTrack").attr("src","assets/images/ten.png");
   }else if(livesLeft===2){
-  $("#scoreTrack").attr("src","assets/images/nine.png");
+    $("#scoreTrack").attr("src","assets/images/nine.png");
   }else if(livesLeft===3){
     $("#scoreTrack").attr("src","assets/images/eight.png");
   }else if(livesLeft===4){
     $("#scoreTrack").attr("src","assets/images/seven.png");
   }else if(livesLeft===5){
     $("#scoreTrack").attr("src","assets/images/six.png");
+    $("body,html").css("background-image","url(assets/images/creepyWoods.jpg)");
+    $("body,html").css("background-size", "cover");
   }else if(livesLeft===6){
     $("#scoreTrack").attr("src","assets/images/five.png");
   }else if(livesLeft===7){
     $("#scoreTrack").attr("src","assets/images/four.png");
+    $("body,html").css("background-image","url(assets/images/bloodAlleyBackground.jpg)");
+    $("body,html").css("background-size", "cover");
   }else if(livesLeft===8){
     $("#scoreTrack").attr("src","assets/images/three.png");
   }else if(livesLeft===9){
@@ -183,12 +248,13 @@ function scoreTrack(){
     $("#scoreTrack").attr("src","assets/images/zero.png");
   }}
 
-$("#begin").click(function(){
+
+$(".begin").click(function(){
   nextQuestion();
   scoreTrack();
   console.log(Questions[question].aCorrect);
   if(!begun){
-  setInterval(function(){
+  setInterval(function runner(){
   begun = true;
 if(minDown>=10){
   if(secDown<10){
@@ -221,23 +287,27 @@ if(minDown>=10){
   // }
   secDown--;
   }
-  if(secDown===50){
-  backgroundSwap();
-  }
   if(secQ<10){
     $("#qTimer").text("0"+secQ);
   }else{
     $("#qTimer").text(secQ);
   }
   secQ--;
+  if((secDown===0 && minDown===0)||secQ===-2||livesLeft===11){
+    lose();
+  }
+  if(currentQ===21){
+    survive();
+  }
 },1000);}});
 
+
+//
+// $(document).on("click","#begin",begin());
 $(document).on("click",".choices",function(){
-  console.log(this);
-  console.log(this.innerHTML);
-  console.log(Questions[question].aCorrect);
   if(this.innerHTML===Questions[question].aCorrect){
-    console.log("great!");
+    console.log(currentQ);
+    correct++;
     secDown += secQ;
     secQ=15;
     if(secDown===0){
@@ -249,7 +319,7 @@ $(document).on("click",".choices",function(){
       minDown++;
     }
   }else{
-    console.log("ouch");
+    incorrect++;
     scoreTrack();
     secDown -= secQ;
     secQ=15;
@@ -262,7 +332,7 @@ $(document).on("click",".choices",function(){
       minDown++;
     }
     if(livesLeft===11){
-      alert("YOU LOSE");
+      lose();
     }
   }
   currentQ ++;

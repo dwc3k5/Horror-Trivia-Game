@@ -6,6 +6,8 @@ body{
 }
 
 button{
+  position: relative;
+  z-index:10;
   background-color: black;
   border-color: black;
   color:red;
@@ -14,7 +16,9 @@ button{
   font-size: 28px;
 }
 div{
+  position: relative;
   color: white;
+    z-index: 10;
 }
 .row{
   margin:1% 0;
@@ -24,7 +28,8 @@ h1, h2, h3, p{
   font-family: de-walpergens-pica, serif;
   color: white;
   text-align: center;
-z-index: 10;
+  z-index: 10;
+  position: relative  ;
 }
 .centered{
   text-align: center;
@@ -42,6 +47,8 @@ z-index: 10;
 
 #transparent{
   opacity: 0.5;
+  position: relative;
+  float:left;
 }
 .row{
   text-align:center;
