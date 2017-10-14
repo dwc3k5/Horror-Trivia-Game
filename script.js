@@ -248,6 +248,18 @@ $("button").hover(function(){
   $(this).css("background-color","black");
 });
 
+$(document).on("mouseenter","button",function(){
+  $(this).css("color", "black");
+  $(this).css("background-color","red");
+}).on("mouseleave","button",function(){
+  $(this).css("color","red");
+  $(this).css("background-color","black");
+});
+
+
+
+
+
 $(".begin").click(function(){
   nextQuestion();
   scoreTrack();
@@ -282,6 +294,20 @@ if(minDown>=10){
     $("#qTimer").text("0"+secQ);
   }else{
     $("#qTimer").text(secQ);
+  }
+  if(secQ<6){
+    $("#qHeader").css("color","red");
+    $("#qTimer").css("color", "red");
+  }else{
+    $("#qHeader").css("color","white");
+    $("#qTimer").css("color", "white");
+  }
+  if(secDown<31 && minDown===0){
+    $("#timer").css("color","red");
+    $("#tHeader").css("color","red");
+  }else{
+    $("#tHeader").css("color","white");
+    $("#timer").css("color", "white");
   }
   secQ--;
   if((secDown===0 && minDown===0)||secQ===-2||livesLeft===11){
