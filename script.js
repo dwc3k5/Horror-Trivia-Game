@@ -183,17 +183,8 @@ var Questions ={
 
 
 };
-
-// $("#opening").click(function(){
-//   livesLeft++;
-//   nextQuestion();
-//   scoreTrack();
-//   console.log(livesLeft);
-// });
-/*MainClock--------------------------------------------------------------------*/
-
-
 /*question1placed--------------------------------------------------------------*/
+
 function lose(){
   $("body, html").attr({"background-color":"black",
                         "background-image":""});
@@ -204,6 +195,7 @@ function lose(){
 function survive(){
 $("body").html("<div class='row'><button id='begin'>You Survived!</button></div><div class='row'><button>Correct Answers: "+correct+"</button><button>Incorrect Answers: "+incorrect+"</button>");
 }
+
 function backgroundSwap(){
 
   $("body,html").css("background-image","url(assets/images/creepyWoods.jpg)");
@@ -248,6 +240,13 @@ function scoreTrack(){
     $("#scoreTrack").attr("src","assets/images/zero.png");
   }}
 
+$("button").hover(function(){
+  $(this).css("color", "black");
+  $(this).css("background-color","red");
+}, function(){
+  $(this).css("color", "red");
+  $(this).css("background-color","black");
+});
 
 $(".begin").click(function(){
   nextQuestion();
@@ -266,10 +265,6 @@ if(minDown>=10){
     secDown=60;
     minDown--;
   }
-  // if(secDown>60){
-  //   secDown-=60;
-  //   minDown++;
-  // }
   secDown--;
 }else{
   if(secDown<10){
@@ -281,10 +276,6 @@ if(minDown>=10){
     secDown=60;
     minDown--;
   }
-  // if(secDown>60){
-  //   secDown-=60;
-  //   minDown++;
-  // }
   secDown--;
   }
   if(secQ<10){
