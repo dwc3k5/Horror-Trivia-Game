@@ -188,8 +188,7 @@ var Questions ={
 function lose(){
   $("body, html").attr({"background-color":"black",
                         "background-image":""});
-  $("body").html("<div class='row'><button id='begin'>Play again?</button></div>");
-  $("body").html("<div class='row'><button id='begin'>You are Dead!</button></div><div class='row'><button>Correct Answers: "+correct+"</button><button>Incorrect Answers: "+incorrect+"</button>");
+  $("body").html("<div class='row'><a href='https://dwc3k5.github.io/Horror-Trivia-Game/'><button id='begin'>Play again?</button></a></div><div class='row'><button id='begin'>You are Dead!</button></div><div class='row'><button>Correct Answers: "+correct+"</button><button>Incorrect Answers: "+incorrect+"</button>");
 }
 
 function survive(){
